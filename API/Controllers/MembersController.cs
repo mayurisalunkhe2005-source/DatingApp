@@ -9,7 +9,7 @@ namespace API.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 
-[Authorize]
+
 public class MembersController(DataContext context) : BaseApiController
 {
 
@@ -21,7 +21,6 @@ public class MembersController(DataContext context) : BaseApiController
         return members;
     }
 
-    [Authorize]
     [HttpGet("{id}")]
     public async Task<ActionResult<AppUser>> GetMember(string id)
     {
