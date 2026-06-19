@@ -1,13 +1,32 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideRouter, withViewTransitions } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
-
 import { routes } from './app.routes';
+import { InitService } from './init-service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
-    provideHttpClient()
+    provideRouter(routes, withViewTransitions()),
+    provideHttpClient(),
+    provideAppInitializer(async () => {
+      const initService = inject(InitService);
+
+      return new Promise<void>((resolve) => {
+        setTimeout(async () => {
+          try {
+            const initService = inject(InitService);
+          } finally {
+            const splash = document.getElementById('initial-splash');
+            if (splash) {
+              splash.remove();
+            }
+            resolve()
+          }
+        }, 500)
+      })
+
+
+    })
   ]
 };
