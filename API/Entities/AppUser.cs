@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace API.Entities;
 
 public class AppUser
@@ -8,7 +10,14 @@ public class AppUser
 
     public required string Email { get; set; }
 
+    public string? ImageUrl {get;set;}
+
+
     public required byte[] PasswordHash { get; set; }
 
     public required byte[] PasswordSalt { get; set; }
+
+    //navigatiion property
+    [JsonIgnore]
+    public Member Member {get;set;}=null!;
 }
