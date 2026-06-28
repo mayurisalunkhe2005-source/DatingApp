@@ -6,7 +6,7 @@ namespace API.DTOs
 
         public required string Email { get; set; }
 
-        public DateOnly dateOfBirth { get; set; }
+        public DateOnly DateOfBirth { get; set; }
 
         public string? ImageUrl { get; set; }
 
